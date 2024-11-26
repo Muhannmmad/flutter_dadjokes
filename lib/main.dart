@@ -20,6 +20,9 @@ class JokeApp extends StatefulWidget {
 }
 
 class _JokeAppState extends State<JokeApp> {
+  String joke =
+      "Click to read a new joke if you want to smile or laugh or close the app and stay deppressed as Me 😂 👀 🙈";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +36,7 @@ class _JokeAppState extends State<JokeApp> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             TextField(
+              controller: TextEditingController(text: joke),
               readOnly: true,
               maxLines: null,
               decoration: InputDecoration(

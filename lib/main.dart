@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      title: 'Dad Joke App',
+      home: JokeApp(),
     );
+  }
+}
+
+class JokeApp extends StatefulWidget {
+  @override
+  _JokeAppState createState() => _JokeAppState();
+}
+
+class _JokeAppState extends State<JokeApp> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }

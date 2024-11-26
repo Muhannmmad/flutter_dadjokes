@@ -22,6 +22,32 @@ class JokeApp extends StatefulWidget {
 class _JokeAppState extends State<JokeApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Dad Joke App'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextField(
+              readOnly: true,
+              maxLines: null,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Dad Joke',
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('Get a Joke'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

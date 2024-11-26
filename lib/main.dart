@@ -34,7 +34,7 @@ class _JokeAppState extends State<JokeApp> {
     });
 
     try {
-      final url = Uri.parse('https://icanhazdadjokes.com/');
+      final url = Uri.parse('https://icanhazdadjoke.com/');
       final response = await http.get(
         url,
         headers: {'Accept': 'application/json'},

@@ -26,21 +26,37 @@ class _JokeAppState extends State<JokeApp> {
   String joke =
       "Click to read a new joke if you want to smile or laugh or close the app and stay deppressed as Me 😂 👀 🙈";
 
-  Future<void> fetchJoke() async {
-    final url = Uri.parse('https://icanhazdadjoke.com/');
-    final response = await http.get(
-      url,
-      headers: {'Accept': 'application/json'},
-    );
+  bool isLoading = false;
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
+  Future<void> fetchJoke() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final url = Uri.parse('https://icanhazdadjokes.com/');
+      final response = await http.get(
+        url,
+        headers: {'Accept': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          joke = data['joke'];
+        });
+      } else {
+        setState(() {
+          joke = "Error: ${response.statusCode} - ${response.reasonPhrase}";
+        });
+      }
+    } catch (e) {
       setState(() {
-        joke = data['joke'];
+        joke = "An error occurred: $e";
       });
-    } else {
+    } finally {
       setState(() {
-        joke = "looks like something wrong . Try again ";
+        isLoading = false;
       });
     }
   }
@@ -67,10 +83,12 @@ class _JokeAppState extends State<JokeApp> {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: fetchJoke,
-              child: Text('Get a Joke'),
-            ),
+            isLoading
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: fetchJoke,
+                    child: Text('Get a Joke'),
+                  ),
           ],
         ),
       ),
